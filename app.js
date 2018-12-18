@@ -50,6 +50,17 @@ app.get('/topic/:id/:mode', function(req, res){
 }
 );
 
+app.get('/form', function(req, res){
+	res.render('form');
+}
+);
+
+app.get('/form_receiver', function(req, res){
+	var title = req.query.title;
+	var desc = req.query.description;
+	res.send(title+' '+desc);
+}
+);
 
 app.listen(3000, function(){
 	console.log('Connected 3000 port');
