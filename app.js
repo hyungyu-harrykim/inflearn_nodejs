@@ -30,7 +30,7 @@ app.get('/template', function(req, res){
 }
 );
 
-app.get('/topic', function(req, res){
+app.get('/topic/:id', function(req, res){
 	var topics = [
 		'Javascript is ...',
 		'Nodejs is ...',
@@ -40,11 +40,16 @@ app.get('/topic', function(req, res){
 	<a href="/topic?id=0">Javascript</a><br>
 	<a href="/topic?id=1">Nodejs</a><br>
 	<a href="/topic?id=2">Express</a><br><br>
-	${topics[req.query.id]}
+	${topics[req.params.id]}
 	`
 	res.send(output);	// query string
 }
 );
+app.get('/topic/:id/:mode', function(req, res){
+	res.send(req.params.id+' '+req.params.mode);
+}
+);
+
 
 app.listen(3000, function(){
 	console.log('Connected 3000 port');
