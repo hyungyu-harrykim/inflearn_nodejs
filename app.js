@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 app.locals.pretty = true;
 
@@ -10,6 +11,9 @@ app.set('views', './views');
 // public이라는 경로에 정적 파일이 위치하도록 지정
 app.use(express.static('public'));
 
+// body parser 이라는 모듈(미들웨어) 붙임
+// app.body를 사용하려면 body parser 필요
+app.use(bodyParser.urlencoded({extended: false})) 		
 
 // Routing(get) & Controller(res.send)
 app.get('/', function(req, res){
@@ -62,6 +66,12 @@ app.get('/form_receiver', function(req, res){
 }
 );
 
+app.post('/form_receiver', function(req, res){
+	var title = req.body.title;
+	var desc = req.body.description;
+	res.send(title+' '+desc);
+}
+);
 app.listen(3000, function(){
 	console.log('Connected 3000 port');
 }
